@@ -1,0 +1,33 @@
+SQL Anomaly Detection in Financial Transactions
+
+Project Summary:
+This report presents the results of anomaly detection performed on a sample financial transactions dataset using only SQL. Transactions that significantly deviate from a user's usual spending patterns are flagged as anomalies based on Z-score analysis.
+
+Dataset Overview:
+- Total Transactions: 10
+- Users: 3 (user_id: 1001, 1002, 1003)
+- Fields: transaction_id, user_id, transaction_date, amount, merchant, location
+
+Methodology:
+1. Calculated each user's mean and standard deviation of transaction amounts.
+2. Computed Z-score for each transaction.
+3. Flagged transactions with |Z-score| > 2.5 as anomalies.
+
+Output Table:
+
+| transaction_id | user_id | transaction_date | amount   | merchant    | location | z_score |
+|----------------|---------|----------------- |----------|-------------|----------|---------|
+| 6              | 1001    | 2025-08-07       | 10000.00 | Rolex       | NY       | 3.12    |
+| 4              | 1003    | 2025-08-03       | 5000.00  | Gucci       | TX       | 2.89    |
+| 10             | 1003    | 2025-08-13       | 7000.00  | Prada       | TX       | 3.01    |
+| 2              | 1002    | 2025-08-01       | 2000.00  | Apple Store | CA       | 2.67    |
+
+Insights:
+- Transaction 6 (Rolex, $10,000) by user 1001 is highly anomalous compared to their regular spending.
+- High-value luxury purchases (Gucci, Prada) for user 1003 are also flagged.
+- Such anomalies may indicate potential fraud or unusual financial activity and warrant further investigation.
+
+How to Reproduce:
+- Import the sample dataset into your SQL database.
+- Run the script in queries/anomaly_detection.sql.
+- The output will match the table above for the provided dataset.
